@@ -59,13 +59,13 @@ Posteriormente, se unieron las dos fastas en una sola y se alinearon con muscle,
 
 **Tree 1 - Gen ND1**
 
-![Tree 1](Tree1(ND1).jpeg)
+![Tree 1](https://github.com/solm14/Proyecto-final/blob/main/Results/Tree1(ND1).jpeg)
 
 - El árbol filogenético muestra la relación evolutiva entre especies de pingüinos y un grupo externo (Uria lomvia) del gen ND1. Se observan agrupaciones claras por género: Pygoscelis papua forma un clado monofilético con alta variabilidad intraespecífica; P. adeliae y P. antarcticus están cercanamente relacionados. Aptenodytes y Spheniscus también forman clados separados, reflejando su divergencia evolutiva. El uso de Uria lomvia como outgroup permite enraizar el árbol y evidenciar la separación entre pingüinos y otras aves marinas.
 
 **Tree 2 - Gen CYTB**
 
-![Tree 1](Tree2(CYTB).jpeg)
+![Tree 1](https://github.com/solm14/Proyecto-final/blob/main/Results/Tree2(CYTB).jpeg)
 
 - Este árbol filogenético del gen CYTB, confirma la agrupación esperada de especies dentro de los géneros Pygoscelis, Spheniscus y Eudyptes, pero muestra una separación inesperada entre las especies de Aptenodytes, posiblemente por diferencias en la secuencia usada; también emplea una secuencia de cytochrome b como grupo externo artificial.
 
