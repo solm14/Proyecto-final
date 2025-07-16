@@ -49,7 +49,7 @@ mkdir IDEA-DE-PROYECTO2
 ## Creación de un bash 
 
 Se creo un bash en el cual se descargaron las secuencias de los genes ND1 y CYTB, de las dos familias correspondientes, Spheniscidae (30 secuencias ya que era un gen muy pesado en esta familia) y Alcidae (Una secuencia). Luego se transformaron en fasta y se editaron con atom directamente para que solo salga el numero de secuencia y el nombre científico.
-Posteriormente, se unieron las dos fastas en una sola y se alinearon con muscle, y se ejecutaron con IQ-TREE. Finalmente al tener todos los tres, se unieron en un cat de nombre Alltrees.tree, para poder ver la filogenia en la herramienta de FigTree.
+Posteriormente, se unieron las dos fastas en una sola y se alinearon con muscle, y se ejecutaron con IQ-TREE. Finalmente al tener todos los trees, se unieron en un cat de nombre Alltrees.tree, para poder ver la filogenia en la herramienta de FigTree.
 
 * Todo el proceso del bash se encuentra en el encabezado SCRIPT.
 
