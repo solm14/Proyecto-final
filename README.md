@@ -1,12 +1,13 @@
 # Análisis evolutivo filogenéticamente entre genes equivalentes de la familia Spheniscidae
 
-Este proyecto tiene como objetivo reconstruir la historia evolutiva de pingüinos de la familia Spheniscidae mediante el análisis de tres genes ortólogos mitocondriales (ND1 y CYTB), las cuales, se obtuvieron de la base de datos NCBI.
+Este proyecto tiene como objetivo reconstruir la historia evolutiva de pingüinos de la familia Spheniscidae mediante el análisis de tres genes mitocondriales (ND1 y CYTB), las cuales, se obtuvieron de la base de datos NCBI.
 
 ---
 
 ## En primera instancia
 
 Este documento proporciona los pasos necesarios para ejecutar el análisis filogenético en una supercomputadora, comenzando con la descarga de secuencias y finalizando con la visualización de los árboles, para luego comenzar con el análisis evolutivo. Además, se involucrara un grupo externo (Alcidae), para poder ver su relación con Spheniscidae.
+
 ---
 
 ## Prerrequisitos
@@ -43,7 +44,7 @@ cd $SCRATCH/Bioinformatica-PUCE/RepotenBio/SolCz
 
 mkdir IDEA-DE-PROYECTO2
 
----
+```
 
 ## Creación de un bash 
 
