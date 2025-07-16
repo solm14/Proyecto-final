@@ -1,12 +1,12 @@
 # Análisis evolutivo filogenéticamente entre genes equivalentes de la familia Spheniscidae
 
-Este proyecto tiene como objetivo reconstruir la historia evolutiva de pingüinos de la familia Spheniscidae mediante el análisis de tres genes ortólogos mitocondriales (BRCA1, CYTB y ATP8), las cuales, se obtuvieron de la base de datos NCBI.
+Este proyecto tiene como objetivo reconstruir la historia evolutiva de pingüinos de la familia Spheniscidae mediante el análisis de tres genes ortólogos mitocondriales (ND1 y CYTB), las cuales, se obtuvieron de la base de datos NCBI.
 
 ---
 
 ## En primera instancia
 
-Este documento proporciona los pasos necesarios para ejecutar el análisis filogenético en una supercomputadora, comenzando con la descarga de secuencias y finalizando con la visualización de los árboles, para luego comenzar con el análisis evolutivo. 
+Este documento proporciona los pasos necesarios para ejecutar el análisis filogenético en una supercomputadora, comenzando con la descarga de secuencias y finalizando con la visualización de los árboles, para luego comenzar con el análisis evolutivo. Además, se involucrara un grupo externo (Alcidae), para poder ver su relación con Spheniscidae.
 ---
 
 ## Prerrequisitos
@@ -14,7 +14,7 @@ Este documento proporciona los pasos necesarios para ejecutar el análisis filog
 * Contar con acceso a una supercomputadora.
 * Tener disponible una terminal o Git Bash.
 * Disponer de los siguientes programas instalados en el ordenador y en una carpeta propia de la supercomputadora:
-  * `datasets` de NCBI para la descarga de secuencias.
+  * `esearch` de NCBI para la descarga de secuencias biomédicas.
   * `MUSCLE` para realizar alineamientos múltiples.
   * `IQ-TREE` 2 para llevar a cabo la inferencia filogenética.
   * `FigTree` para la visualización de árboles evolutivos.
@@ -23,7 +23,6 @@ Este documento proporciona los pasos necesarios para ejecutar el análisis filog
 ---
 
 ## Instalación
-
 ```bash
 # 1. Conexión a la supercomputadora (Hofmann)
 Primero, se accede al sistema remoto utilizando el siguiente comando:
@@ -40,90 +39,39 @@ Se dirige al directorio donde se desarrollará el proyecto:
 
 cd $SCRATCH/Bioinformatica-PUCE/RepotenBio/SolCz
 
-# 4. Crear el entorno de trabajo
-Se genera un nuevo directorio para el proyecto, copia el ejecutable de ''datasets'', y se accede a la nueva carpeta:
+# 4. Crear una carpeta de trabajo
 
-mkdir Proyecto final
-cp datasets Proyecto final/
-cd Proyecto final/
-```
-
-### Descarga de genes ortólogos y Procesamiento de cada archivo ZIP
-```bash
-# Descarga de genes ortólogos
-Se utiliza el comando ''datasets'' para descargar los genes mitocondriales BRCA1, CYTB y ATP8 correspondientes a especies de la familia Spheniscidae:
-
-./datasets download gene symbol BRCA1 --ortholog Spheniscidae --filename BRCA1_Spheniscidae.zip
-./datasets download gene symbol CYTB --ortholog Spheniscidae --filename CYTB_Spheniscidae.zip
-./datasets download gene symbol ATP8 --ortholog Spheniscidae --filename ATP8_Spheniscidae.zip
-
-# Procesamiento de cada archivo ZIP
-Se descomprime los archivos descargados, renombra las secuencias, y organiza los archivos FASTA:
-
-* BRCA1
-unzip BRCA1_Spheniscidae.zip
-cd ncbi_dataset/data
-mv rna.fna BRCA1.fa
-cp BRCA1.fa ../../../
-cd ../../../
-rm -r ncbi_dataset
-
-* (Se repite con CYTB y ATP8)
-
-# Organizar secuencias
-Una vez renombradas, junta todas las secuencias en una carpeta:
-
-cat *.fa > Secuencias/
-```
-
-### Transferencia y edición local
-```bash
-Se copia la carpeta de secuencias a la computadora local para su edición por medio de Atom, y luego vuelve a transferir al entorno de la supercomputadora:
-
-# Transferencia desde la supercomputadora a la máquina local
-scp -r dechavez@hoffman2.idre.ucla.edu:/u/scratch/d/dechavez/Bioinformatica-PUCE/RepotenBio/SolCz/Proyecto final/Secuencias ./
-
-# editar con Atom
-
-# Envío de vuelta a la supercomputadora
-scp -r ./Secuencias dechavez@hoffman2.idre.ucla.edu:/u/scratch/d/dechavez/Bioinformatica-PUCE/RepotenBio/SolCz/Proyecto final/
-```
-
-### Alineamiento de secuencias y análisis filogenético
-```bash
-Se ejecuta los alineamientos múltiples con muscle e infiere los árboles filogenéticos con iq-tree:
-
-cd SECUENCIAS
-cp ../../muscle3.8.31_i86linux64 ./
-
-# Alinear con muscle cada gen 
-for gene in *.fa ; do
-> ./muscle3.8.31_i86linux64 -in $gene -out muscle_$gene -maxiters 1 -diags
->done
-
-# Cargar el módulo iq-tree y realizar análisis
-module load iqtree/2.2.2.6
-for muscle in muscle_* ; do
-> iqtree2 -s ${muscle}
->done
-
-# Combinar todos los trees generados en un único archivo
-cat *.treefile > Alltrees.tree
-```
+mkdir IDEA-DE-PROYECTO2
 
 ---
 
-## Pruebas realizadas
+## Creación de un bash 
 
-* Se construyeron árboles filogenéticos individuales correspondientes a cada gen para poder analizarlos.
-* Los archivos con extensión .tree fueron examinados utilizando el programa FigTree.
-* Se llevaron a cabo alineamientos por separado para cada uno de los tres genes.
+Se creo un bash en el cual se descargaron las secuencias de los genes ND1 y CYTB, de las dos familias correspondientes, Spheniscidae (30 secuencias ya que era un gen muy pesado en esta familia) y Alcidae (Una secuencia). Luego se transformaron en fasta y se editaron con atom directamente para que solo salga el numero de secuencia y el nombre científico.
+Posteriormente, se unieron las dos fastas en una sola y se alinearon con muscle, y se ejecutaron con IQ-TREE. Finalmente al tener todos los tres, se unieron en un cat de nombre Alltrees.tree, para poder ver la filogenia en la herramienta de FigTree.
+
+* Todo el proceso del bash se encuentra en el encabezado SCRIPT.
+
+---
+
+## Resultados 
+
+**Tree 1 - Gen ND1**
+
+![Tree 1](Tree1(ND1).jpeg)
+
+- El árbol filogenético muestra la relación evolutiva entre especies de pingüinos y un grupo externo (Uria lomvia) del gen ND1. Se observan agrupaciones claras por género: Pygoscelis papua forma un clado monofilético con alta variabilidad intraespecífica; P. adeliae y P. antarcticus están cercanamente relacionados. Aptenodytes y Spheniscus también forman clados separados, reflejando su divergencia evolutiva. El uso de Uria lomvia como outgroup permite enraizar el árbol y evidenciar la separación entre pingüinos y otras aves marinas.
+
+**Tree 2 - Gen CYTB**
+
+![Tree 1](Tree2(CYTB).jpeg)
+
+- Este árbol filogenético del gen CYTB, confirma la agrupación esperada de especies dentro de los géneros Pygoscelis, Spheniscus y Eudyptes, pero muestra una separación inesperada entre las especies de Aptenodytes, posiblemente por diferencias en la secuencia usada; también emplea una secuencia de cytochrome b como grupo externo artificial.
 
 ---
 
 ## Construido con
 
-* [NCBI datasets](https://www.ncbi.nlm.nih.gov/datasets/)
 * [muscle](https://www.drive5.com/muscle/)
 * [iq-tree 2](http://www.iqtree.org/)
 * [FigTree](http://tree.bio.ed.ac.uk/software/figtree/)
@@ -152,5 +100,10 @@ La presente iniciativa se realiza con objetivos educativos en el marco de la car
 
 ## Imagen del organismo
 
+**Familia Spheniscidae**
+
 ![Spheniscidae](https://datazone.darwinfoundation.org/images/checklist/5189_penguin_group_hms_ppt.jpg) 
 
+**Familia Alcidae**
+
+![Alcidae](https://deanimalia.com/images/full/regionespolares/frailecillo2.jpg) 
